@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Lopay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #166534;
+      --navy-mid: #14532D;
+      --gold: #22C55E;
+      --gold-light: #4ADE80;
+      --cream: #F0FDF4;
+      --cream-dark: #DCFCE7;
+      --white: #FFFFFF;
+      --text: #1a1a1a;
+      --text-muted: #555;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(20,83,45,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.7rem; font-weight: 900;
+      color: var(--white); text-decoration: none; letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back::before { content: '←'; font-size: 1rem; }
+
+    /* HERO BANNER */
+    .page-hero {
+      background: var(--navy-mid);
+      padding: 72px 6% 56px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(74,222,128,0.08) 0%, transparent 70%);
+    }
+    .page-hero-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 50px; padding: 6px 16px; margin-bottom: 20px;
+    }
+    .page-hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; color: var(--white); line-height: 1.1;
+      max-width: 700px;
+    }
+    .page-hero-meta {
+      margin-top: 16px; font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* CONTENT */
+    .legal-wrap {
+      max-width: 820px; margin: 0 auto;
+      padding: 64px 6% 100px;
+    }
+    .toc {
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      border-radius: 16px; padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+    .toc h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 14px;
+    }
+    .toc ol {
+      padding-left: 18px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .toc ol li a {
+      font-size: 0.88rem; color: var(--navy);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .toc ol li a:hover { color: var(--gold); }
+
+    .legal-section { margin-bottom: 52px; }
+    .legal-section h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--navy); margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--cream-dark);
+    }
+    .legal-section h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--navy); margin: 24px 0 10px;
+    }
+    .legal-section p {
+      font-size: 0.95rem; color: var(--text-muted);
+      line-height: 1.8; margin-bottom: 14px;
+    }
+    .legal-section ul, .legal-section ol {
+      padding-left: 20px; display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .legal-section li {
+      font-size: 0.95rem; color: var(--text-muted); line-height: 1.7;
+    }
+    .legal-section strong { color: var(--text); font-weight: 600; }
+    .legal-highlight {
+      background: var(--cream-dark);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px; margin: 20px 0;
+      font-size: 0.92rem; color: var(--navy);
+      line-height: 1.7;
+    }
+
+    /* CONTACT BOX */
+    .contact-box {
+      background: var(--navy-mid);
+      border-radius: 20px; padding: 40px 36px;
+      text-align: center; margin-top: 60px;
+    }
+    .contact-box h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .contact-box p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .contact-box a {
+      display: inline-block;
+      background: var(--gold); color: var(--navy-mid);
+      border-radius: 50px; padding: 12px 28px;
+      font-size: 0.9rem; font-weight: 700;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-box a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,197,94,0.4); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-mid);
+      padding: 28px 6%;
+      text-align: center;
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Lo<span>pay</span></a>
+  <a class="nav-back" href="index.html">Back to Home</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-tag">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p class="page-hero-meta">Last updated: April 17, 2025 &nbsp;·&nbsp; Effective: April 17, 2025</p>
+</div>
+
+<div class="legal-wrap">
+
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#s1">Who We Are</a></li>
+      <li><a href="#s2">Information We Collect</a></li>
+      <li><a href="#s3">How We Use Your Information</a></li>
+      <li><a href="#s4">How We Share Your Information</a></li>
+      <li><a href="#s5">Data Retention</a></li>
+      <li><a href="#s6">Security of Your Data</a></li>
+      <li><a href="#s7">Your Rights</a></li>
+      <li><a href="#s8">Cookies & Tracking</a></li>
+      <li><a href="#s9">Third-Party Links</a></li>
+      <li><a href="#s10">Children's Privacy</a></li>
+      <li><a href="#s11">Changes to This Policy</a></li>
+      <li><a href="#s12">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <div class="legal-highlight">
+    Your privacy matters deeply to us at Lopay. This policy explains what personal data we collect, why we collect it, how we use it, and how we protect it. Please read it carefully. By using Lopay, you agree to the practices described here.
+  </div>
+
+  <div class="legal-section" id="s1">
+    <h2>1. Who We Are</h2>
+    <p>Lopay Financial Technologies Ltd. ("Lopay", "we", "us", or "our") is a financial technology company registered in Nigeria. We operate the Lopay platform — a service that enables parents to pay school fees in flexible installments while ensuring schools receive timely and reliable remittances.</p>
+    <p>Our registered address is: <strong>Lagos, Nigeria.</strong></p>
+    <p>For any privacy-related questions, contact us at <strong>privacy@lopay.ng</strong>.</p>
+  </div>
+
+  <div class="legal-section" id="s2">
+    <h2>2. Information We Collect</h2>
+    <h3>2.1 Information You Provide Directly</h3>
+    <p>When you register or use Lopay, we may collect:</p>
+    <ul>
+      <li><strong>Identity information:</strong> Full name, email address, phone number, date of birth.</li>
+      <li><strong>Account information:</strong> Username, password (stored in hashed form), profile photo (optional).</li>
+      <li><strong>Financial information:</strong> Bank account details, card information (processed via secure third-party payment providers; Lopay does not store raw card numbers), and transaction history.</li>
+      <li><strong>School information (for school administrators):</strong> School name, registration number, bank details for remittance, and fee schedules.</li>
+      <li><strong>Child/student information (for parents):</strong> Child's name, class, and school — used solely to associate payments with the correct school and student record.</li>
+    </ul>
+    <h3>2.2 Information Collected Automatically</h3>
+    <p>When you access our platform, we may automatically collect:</p>
+    <ul>
+      <li>Device information (device type, operating system, browser type).</li>
+      <li>IP address and approximate location.</li>
+      <li>Usage data (pages visited, features used, session duration).</li>
+      <li>Cookies and similar tracking technologies (see Section 8).</li>
+    </ul>
+    <h3>2.3 Information from Third Parties</h3>
+    <p>We may receive information about you from payment processors, identity verification services, and fraud prevention partners to help us verify your identity and protect your account.</p>
+  </div>
+
+  <div class="legal-section" id="s3">
+    <h2>3. How We Use Your Information</h2>
+    <p>We use the information we collect for the following purposes:</p>
+    <ul>
+      <li><strong>To provide and operate the Lopay service</strong> — processing installment payments, remitting funds to schools, and maintaining accurate transaction records.</li>
+      <li><strong>To verify your identity</strong> — complying with Know Your Customer (KYC) and Anti-Money Laundering (AML) regulations applicable under Nigerian law.</li>
+      <li><strong>To communicate with you</strong> — sending payment confirmations, reminders, service updates, and security alerts.</li>
+      <li><strong>To improve our platform</strong> — analysing usage patterns to improve user experience and product features.</li>
+      <li><strong>To prevent fraud and ensure security</strong> — monitoring for suspicious activity and protecting your account.</li>
+      <li><strong>To comply with legal obligations</strong> — meeting regulatory requirements imposed by the Central Bank of Nigeria (CBN) and other applicable authorities.</li>
+    </ul>
+    <p>We do not sell your personal data to third parties for their marketing purposes.</p>
+  </div>
+
+  <div class="legal-section" id="s4">
+    <h2>4. How We Share Your Information</h2>
+    <p>We only share your information in the following circumstances:</p>
+    <ul>
+      <li><strong>With schools:</strong> When you make a payment, the relevant school receives confirmation of the payment amount, your name, and the student record. Schools do not receive your bank or card details.</li>
+      <li><strong>With payment processors:</strong> To facilitate transactions, we share necessary information with licensed payment service providers (e.g., Paystack, Flutterwave). These processors are bound by their own privacy obligations.</li>
+      <li><strong>With identity verification partners:</strong> To meet KYC/AML obligations.</li>
+      <li><strong>With regulatory authorities:</strong> Where required by law, court order, or lawful government request.</li>
+      <li><strong>With service providers:</strong> Cloud hosting, analytics, and customer support providers who process data on our behalf under strict confidentiality agreements.</li>
+      <li><strong>In a business transfer:</strong> If Lopay is acquired or merges with another entity, your data may be transferred as part of that transaction, subject to the same privacy protections.</li>
+    </ul>
+    <div class="legal-highlight">We will never sell, rent, or trade your personal information to third parties for advertising or marketing purposes.</div>
+  </div>
+
+  <div class="legal-section" id="s5">
+    <h2>5. Data Retention</h2>
+    <p>We retain your personal data for as long as your account is active or as needed to provide our services. Specifically:</p>
+    <ul>
+      <li>Transaction records are retained for a minimum of <strong>7 years</strong> to comply with Nigerian financial regulations.</li>
+      <li>Account data is retained until you request deletion, subject to legal retention requirements.</li>
+      <li>Usage and analytics data is retained in anonymised or aggregated form indefinitely.</li>
+    </ul>
+    <p>After the applicable retention period, your data is securely deleted or anonymised.</p>
+  </div>
+
+  <div class="legal-section" id="s6">
+    <h2>6. Security of Your Data</h2>
+    <p>We take the security of your data seriously and implement robust technical and organisational measures including:</p>
+    <ul>
+      <li>End-to-end encryption of all payment data in transit (TLS 1.2+).</li>
+      <li>AES-256 encryption of sensitive data at rest.</li>
+      <li>Multi-factor authentication (MFA) for all user accounts.</li>
+      <li>Regular security audits and penetration testing.</li>
+      <li>Strict internal access controls — only authorised personnel can access personal data, and only on a need-to-know basis.</li>
+    </ul>
+    <p>While we strive to protect your information, no method of transmission over the internet or electronic storage is 100% secure. We encourage you to use strong, unique passwords and to contact us immediately if you suspect any unauthorised access to your account.</p>
+  </div>
+
+  <div class="legal-section" id="s7">
+    <h2>7. Your Rights</h2>
+    <p>As a user of Lopay, you have the following rights with respect to your personal data:</p>
+    <ul>
+      <li><strong>Right to access:</strong> Request a copy of the personal data we hold about you.</li>
+      <li><strong>Right to correction:</strong> Request that we correct any inaccurate or incomplete data.</li>
+      <li><strong>Right to deletion:</strong> Request deletion of your personal data, subject to legal retention obligations.</li>
+      <li><strong>Right to object:</strong> Object to certain types of processing, including direct marketing.</li>
+      <li><strong>Right to data portability:</strong> Receive your data in a structured, machine-readable format.</li>
+      <li><strong>Right to withdraw consent:</strong> Where processing is based on consent, you may withdraw it at any time without affecting prior processing.</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <strong>privacy@lopay.ng</strong>. We will respond within 30 days.</p>
+  </div>
+
+  <div class="legal-section" id="s8">
+    <h2>8. Cookies & Tracking</h2>
+    <p>We use cookies and similar technologies to:</p>
+    <ul>
+      <li>Keep you logged in and maintain your session.</li>
+      <li>Remember your preferences.</li>
+      <li>Understand how you use our platform (analytics).</li>
+      <li>Prevent fraud and improve security.</li>
+    </ul>
+    <p>You can control cookie settings through your browser. Note that disabling certain cookies may affect the functionality of the Lopay platform. We do not use cookies for third-party advertising.</p>
+  </div>
+
+  <div class="legal-section" id="s9">
+    <h2>9. Third-Party Links</h2>
+    <p>Our platform may contain links to third-party websites or services. This Privacy Policy does not apply to those third parties. We encourage you to review the privacy policies of any external sites you visit. Lopay is not responsible for the privacy practices or content of third-party sites.</p>
+  </div>
+
+  <div class="legal-section" id="s10">
+    <h2>10. Children's Privacy</h2>
+    <p>Lopay is designed for use by adults — parents and school administrators. Our accounts may include references to children (students), but children under the age of 18 are not permitted to create accounts on the Lopay platform.</p>
+    <p>The limited information we hold about students (name, class, school) is collected solely for the purpose of processing school fee payments and is never used for marketing, profiling, or any other purpose. This data is shared only with the relevant school.</p>
+  </div>
+
+  <div class="legal-section" id="s11">
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, or legal requirements. When we make significant changes, we will:</p>
+    <ul>
+      <li>Notify you via email or an in-app notification.</li>
+      <li>Update the "Last Updated" date at the top of this page.</li>
+    </ul>
+    <p>Your continued use of Lopay after the effective date of any update constitutes your acceptance of the revised policy. We encourage you to review this policy periodically.</p>
+  </div>
+
+  <div class="legal-section" id="s12">
+    <h2>12. Contact Us</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or how we handle your personal data, please reach out to us:</p>
+    <ul>
+      <li><strong>Email:</strong> privacy@lopay.ng</li>
+      <li><strong>Address:</strong> Lopay Financial Technologies Ltd., Lagos, Nigeria</li>
+    </ul>
+  </div>
+
+  <div class="contact-box">
+    <h3>Questions about your privacy?</h3>
+    <p>Our team is happy to clarify anything in this policy or help you exercise your data rights.</p>
+    <a href="mailto:privacy@lopay.ng">Contact Privacy Team</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Lopay Financial Technologies Ltd. &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>

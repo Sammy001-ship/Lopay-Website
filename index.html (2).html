@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lopay — Pay School Fees, Your Way</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────── TOKENS ─────────────── */
+    :root {
+      --g50:  #f0fdf4;
+      --g100: #dcfce7;
+      --g200: #bbf7d0;
+      --g300: #86efac;
+      --g400: #4ade80;
+      --g500: #22c55e;
+      --g600: #16a34a;
+      --g700: #15803d;
+      --g800: #166534;
+      --g900: #14532d;
+      --g950: #052e16;
+      --white: #ffffff;
+      --ink:   #0a160f;
+      --muted: #6b7c72;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --ease: cubic-bezier(.22,.68,0,1.2);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--g50); color: var(--ink); overflow-x: hidden; }
+
+    /* ─────────────── NAV ─────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 5%; transition: all .4s ease;
+    }
+    nav.scrolled {
+      background: rgba(5,46,22,.94);
+      backdrop-filter: blur(16px) saturate(1.6);
+      border-bottom: 1px solid rgba(74,222,128,.1);
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; letter-spacing: -.5px; color: var(--g950); text-decoration: none; }
+    .logo em { font-style: normal; color: var(--g600); }
+    nav.scrolled .logo { color: var(--white); }
+    nav.scrolled .logo em { color: var(--g400); }
+    nav.scrolled .nav-link { color: rgba(255,255,255,.75); }
+    nav.scrolled .nav-link:hover { color: var(--g400); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-link { color: var(--g800); text-decoration: none; font-size: .88rem; font-weight: 500; transition: color .2s; }
+    .nav-link:hover { color: var(--g600); }
+    .nav-cta {
+      background: var(--g600); color: var(--white); border: none; border-radius: 50px;
+      padding: 11px 26px; font-size: .875rem; font-weight: 700; cursor: pointer; font-family: inherit;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .nav-cta:hover { background: var(--g700); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(34,197,94,.35); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--g900); border-radius: 2px; transition: all .3s; }
+    nav.scrolled .hamburger span { background: var(--white); }
+
+    /* ─────────────── HERO ─────────────── */
+    .hero {
+      min-height: 100svh; background: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 100px 5% 60px; gap: 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-blob { position: absolute; pointer-events: none; border-radius: 50%; filter: blur(80px); opacity: .4; }
+    .blob1 { width: 500px; height: 500px; background: var(--g200); top: -100px; right: -80px; animation: float 8s ease-in-out infinite; }
+    .blob2 { width: 300px; height: 300px; background: var(--g100); bottom: -60px; left: 20%; animation: float 10s ease-in-out infinite reverse; }
+    .hero-text { position: relative; z-index: 2; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--g100); border: 1px solid var(--g200); border-radius: 50px;
+      padding: 6px 16px; font-size: .72rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--g800); margin-bottom: 24px;
+    }
+    .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--g500); animation: blink 2s ease-in-out infinite; }
+    .hero h1 { font-family: 'Fraunces', serif; font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 900; line-height: 1.05; color: var(--g950); margin-bottom: 22px; }
+    .hero h1 em { font-style: italic; color: var(--g600); }
+    .hero-desc { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 480px; margin-bottom: 36px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-green {
+      background: var(--g600); color: var(--white); border: none; border-radius: 50px;
+      padding: 14px 32px; font-size: .95rem; font-weight: 700; cursor: pointer; font-family: inherit;
+      display: inline-flex; align-items: center; gap: 8px; transition: all .25s;
+    }
+    .btn-green:hover { background: var(--g700); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(22,163,74,.35); }
+    .btn-outline {
+      background: transparent; color: var(--g800); border: 1.5px solid var(--g200); border-radius: 50px;
+      padding: 14px 32px; font-size: .95rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .25s;
+    }
+    .btn-outline:hover { border-color: var(--g500); background: var(--g50); }
+    .hero-trust { display: flex; align-items: center; gap: 12px; font-size: .8rem; color: var(--muted); font-weight: 500; }
+    .hero-avatars { display: flex; }
+    .hero-avatars span { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--white); background: var(--g200); display: flex; align-items: center; justify-content: center; font-size: .65rem; font-weight: 700; color: var(--g800); margin-right: -8px; }
+    .hero-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 32px; }
+    .hero-stat { background: var(--white); border: 1px solid var(--g100); border-radius: var(--radius-sm); padding: 14px; text-align: center; box-shadow: 0 2px 8px rgba(22,101,52,.06); transition: transform .3s, box-shadow .3s; }
+    .hero-stat:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(22,101,52,.12); }
+    .hero-stat-val { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900; color: var(--g700); line-height: 1; }
+    .hero-stat-lbl { font-size: .65rem; color: var(--muted); margin-top: 4px; font-weight: 500; }
+
+    /* Phone mock */
+    .hero-visual { position: relative; z-index: 2; display: flex; justify-content: center; }
+    .phone-frame { width: 260px; height: 520px; background: var(--g950); border-radius: 40px; padding: 12px; box-shadow: 0 40px 80px rgba(5,46,22,.25), 0 0 0 1px rgba(74,222,128,.15); animation: float 6s ease-in-out infinite; }
+    .phone-screen { width: 100%; height: 100%; background: var(--white); border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; }
+    .phone-notch { width: 80px; height: 22px; background: var(--g950); border-radius: 0 0 14px 14px; margin: 0 auto; }
+    .phone-content { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .phone-header { font-family: 'Fraunces', serif; font-size: .75rem; font-weight: 900; color: var(--g950); margin-bottom: 2px; }
+    .phone-sub { font-size: .6rem; color: var(--muted); }
+    .phone-balance { background: linear-gradient(135deg, var(--g700), var(--g500)); border-radius: 14px; padding: 14px; color: var(--white); }
+    .phone-balance-label { font-size: .55rem; opacity: .8; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+    .phone-balance-amount { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 900; }
+    .phone-balance-sub { font-size: .55rem; opacity: .7; margin-top: 2px; }
+    .phone-progress-label { font-size: .6rem; font-weight: 600; color: var(--g800); display: flex; justify-content: space-between; }
+    .phone-progress-bar { height: 6px; background: var(--g100); border-radius: 4px; margin-top: 4px; }
+    .phone-progress-fill { height: 100%; width: 65%; background: var(--g500); border-radius: 4px; }
+    .phone-txns { display: flex; flex-direction: column; gap: 6px; }
+    .phone-txn { display: flex; align-items: center; gap: 8px; padding: 7px 8px; background: var(--g50); border-radius: 8px; }
+    .phone-txn-icon { width: 24px; height: 24px; border-radius: 8px; background: var(--g100); display: flex; align-items: center; justify-content: center; font-size: .7rem; flex-shrink: 0; }
+    .phone-txn-label { flex: 1; }
+    .phone-txn-name { font-size: .6rem; font-weight: 600; color: var(--g950); }
+    .phone-txn-date { font-size: .52rem; color: var(--muted); }
+    .phone-txn-amt { font-size: .62rem; font-weight: 700; color: var(--g600); }
+    .phone-badge { background: var(--white); border-radius: 14px; padding: 10px 14px; box-shadow: 0 8px 24px rgba(0,0,0,.12); font-size: .65rem; font-weight: 700; color: var(--g800); white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+    .badge-pos1 { position: absolute; right: -110px; top: 80px; animation: slideIn .6s var(--ease) .8s both; }
+    .badge-pos2 { position: absolute; left: -120px; bottom: 100px; animation: slideIn .6s var(--ease) 1.3s both; }
+
+    /* ─────────────── TICKER ─────────────── */
+    .ticker { background: var(--g950); color: var(--g200); padding: 14px 0; overflow: hidden; font-size: .8rem; font-weight: 600; letter-spacing: .03em; }
+    .ticker-track { display: flex; animation: ticker 28s linear infinite; white-space: nowrap; }
+    .ticker-item { display: inline-flex; align-items: center; gap: 10px; padding: 0 40px; }
+    .ticker-sep { color: var(--g500); }
+
+    /* ─────────────── SECTIONS ─────────────── */
+    .section { padding: 96px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-label { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; color: var(--g600); margin-bottom: 12px; }
+    .section-title { font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 900; line-height: 1.1; color: var(--g950); }
+    .section-title em { font-style: italic; color: var(--g600); }
+    .section-sub { font-size: 1rem; color: var(--muted); max-width: 500px; margin: 12px auto 0; line-height: 1.7; }
+
+    /* HOW IT WORKS */
+    .how-section { background: var(--white); }
+    .steps-timeline { display: flex; flex-direction: column; position: relative; max-width: 860px; margin: 0 auto; }
+    .steps-timeline::before { content: ''; position: absolute; left: 39px; top: 20px; bottom: 20px; width: 2px; background: linear-gradient(to bottom, var(--g200), var(--g400), var(--g200)); }
+    .step-row { display: flex; gap: 32px; align-items: flex-start; padding: 24px 0; }
+    .step-circle { width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0; background: var(--white); border: 2px solid var(--g200); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 1; transition: all .3s; box-shadow: 0 2px 12px rgba(22,101,52,.08); }
+    .step-row:hover .step-circle { background: var(--g600); border-color: var(--g600); box-shadow: 0 8px 24px rgba(22,163,74,.3); transform: scale(1.08); }
+    .step-circle-num { font-family: 'Fraunces', serif; font-size: .6rem; font-weight: 700; color: var(--muted); letter-spacing: .1em; }
+    .step-circle-icon { font-size: 1.3rem; }
+    .step-row:hover .step-circle-num { color: rgba(255,255,255,.7); }
+    .step-body-wrap { flex: 1; background: var(--g50); border: 1px solid var(--g100); border-radius: var(--radius-md); padding: 24px 28px; transition: all .3s; }
+    .step-row:hover .step-body-wrap { background: var(--white); border-color: var(--g300); box-shadow: 0 12px 40px rgba(22,101,52,.1); transform: translateX(6px); }
+    .step-title { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--g950); margin-bottom: 6px; }
+    .step-desc { font-size: .88rem; color: var(--muted); line-height: 1.65; }
+
+    /* DUAL */
+    .dual-section { background: var(--g950); display: grid; grid-template-columns: 1fr 1fr; }
+    .dual-panel { padding: 80px 6%; border-right: 1px solid rgba(255,255,255,.06); position: relative; overflow: hidden; }
+    .dual-panel:last-child { border-right: none; }
+    .dual-panel::before { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; filter: blur(80px); opacity: .1; pointer-events: none; }
+    .dual-panel:first-child::before { background: var(--g400); top: -80px; right: -80px; }
+    .dual-panel:last-child::before { background: var(--g400); bottom: -80px; left: -80px; }
+    .dual-tag { display: inline-flex; align-items: center; gap: 8px; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); margin-bottom: 20px; }
+    .dual-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--g500); }
+    .dual-panel h3 { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--white); margin-bottom: 14px; line-height: 1.15; }
+    .dual-panel > p { font-size: .92rem; color: rgba(255,255,255,.5); line-height: 1.75; margin-bottom: 32px; }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .check-list li { display: flex; gap: 12px; align-items: flex-start; font-size: .88rem; color: rgba(255,255,255,.7); line-height: 1.5; }
+    .check-icon { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.3); display: flex; align-items: center; justify-content: center; font-size: .62rem; color: var(--g400); margin-top: 1px; }
+
+    /* FEATURES */
+    .features-section { background: var(--g50); }
+    .features-bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
+    .bento-card { background: var(--white); border: 1px solid var(--g100); border-radius: var(--radius-md); padding: 32px 28px; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s, border-color .3s; }
+    .bento-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(22,101,52,.1); border-color: var(--g200); }
+    .bento-card.wide { grid-column: span 2; }
+    .bento-card.dark { background: var(--g900); border-color: transparent; }
+    .bento-card.dark .feat-title { color: var(--white); }
+    .bento-card.dark .feat-desc { color: rgba(255,255,255,.55); }
+    .bento-corner { position: absolute; top: 0; right: 0; width: 120px; height: 120px; background: radial-gradient(circle at top right, rgba(74,222,128,.1), transparent 70%); pointer-events: none; }
+    .feat-icon-wrap { width: 48px; height: 48px; border-radius: 14px; background: var(--g50); border: 1px solid var(--g100); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
+    .bento-card.dark .feat-icon-wrap { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.1); }
+    .feat-title { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--g950); margin-bottom: 8px; }
+    .feat-desc { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+    .feat-tag { display: inline-block; margin-top: 14px; background: var(--g100); color: var(--g700); font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; border-radius: 50px; padding: 4px 12px; }
+    .bento-card.dark .feat-tag { background: rgba(74,222,128,.15); color: var(--g400); }
+
+    /* ABOUT */
+    .about-section { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .about-left p { font-size: .95rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
+    .about-mission-box { background: var(--g950); border-radius: var(--radius-md); padding: 28px; margin-top: 28px; }
+    .about-mission-box h4 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--g400); margin-bottom: 10px; }
+    .about-mission-box p { font-size: .875rem; color: rgba(255,255,255,.6); line-height: 1.7; margin: 0; }
+    .about-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    .about-stat-card { background: var(--g50); border: 1px solid var(--g100); border-radius: var(--radius-md); padding: 24px 20px; transition: all .3s; }
+    .about-stat-card:hover { background: var(--white); border-color: var(--g300); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(22,101,52,.1); }
+    .about-stat-val { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--g700); line-height: 1; }
+    .about-stat-lbl { font-size: .77rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+    .about-values { display: flex; flex-direction: column; gap: 12px; }
+    .about-value { display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: var(--g50); border: 1px solid var(--g100); border-radius: var(--radius-sm); transition: all .3s; }
+    .about-value:hover { border-color: var(--g300); background: var(--white); }
+    .about-value-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--g100); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .about-value h5 { font-family: 'Fraunces', serif; font-size: .95rem; font-weight: 700; color: var(--g950); margin-bottom: 2px; }
+    .about-value p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* TEAM */
+    .team-section { background: var(--g50); }
+    .team-grid { display: flex; gap: 24px; max-width: 900px; margin: 0 auto; }
+    .team-card { flex: 1; background: var(--white); border: 1px solid var(--g100); border-radius: var(--radius-lg); padding: 40px 36px; position: relative; overflow: hidden; transition: all .3s; }
+    .team-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(22,101,52,.12); border-color: var(--g200); }
+    .team-stripe { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--g500), var(--g300)); }
+    .team-avatar { width: 70px; height: 70px; border-radius: 20px; background: var(--g700); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 900; margin-bottom: 20px; }
+    .team-role { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g600); margin-bottom: 6px; }
+    .team-name { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 900; color: var(--g950); line-height: 1.2; margin-bottom: 14px; }
+    .team-bio { font-size: .875rem; color: var(--muted); line-height: 1.7; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, var(--g700) 0%, var(--g600) 50%, var(--g500) 100%); padding: 100px 5%; text-align: center; position: relative; overflow: hidden; }
+    .cta-dots { position: absolute; inset: 0; pointer-events: none; opacity: .06; background-image: radial-gradient(circle, var(--white) 1px, transparent 1px); background-size: 32px 32px; }
+    .cta-section h2 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; color: var(--white); line-height: 1.1; max-width: 700px; margin: 0 auto 16px; position: relative; }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,.8); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .btn-white { background: var(--white); color: var(--g700); border: none; border-radius: 50px; padding: 15px 32px; font-size: .95rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: all .25s; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.2); }
+    .btn-ghost-white { background: rgba(255,255,255,.15); color: var(--white); border: 1.5px solid rgba(255,255,255,.35); border-radius: 50px; padding: 15px 32px; font-size: .95rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .25s; backdrop-filter: blur(8px); }
+    .btn-ghost-white:hover { background: rgba(255,255,255,.25); border-color: rgba(255,255,255,.6); }
+
+    /* FOOTER */
+    footer { background: var(--g950); color: rgba(255,255,255,.45); padding: 64px 5% 32px; }
+    .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.07); max-width: 1200px; margin: 0 auto; }
+    .footer-logo { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 900; color: var(--white); margin-bottom: 12px; display: block; text-decoration: none; }
+    .footer-logo em { font-style: normal; color: var(--g400); }
+    .footer-desc { font-size: .85rem; line-height: 1.65; max-width: 240px; }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: .85rem; cursor: pointer; color: rgba(255,255,255,.5); transition: all .2s; text-decoration: none; }
+    .social-btn:hover { background: rgba(74,222,128,.15); border-color: rgba(74,222,128,.3); color: var(--g400); }
+    .footer-col h5 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: .85rem; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--g400); }
+    .footer-bottom { max-width: 1200px; margin: 28px auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: .78rem; }
+    .status-pill { display: flex; align-items: center; gap: 7px; font-size: .75rem; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--g500); box-shadow: 0 0 0 3px rgba(34,197,94,.2); animation: blink 2s ease-in-out infinite; }
+
+    /* ══════════════════════════════════════════
+       MODAL SYSTEM
+    ══════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(5,46,22,.55);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--white); border-radius: 28px;
+      width: 100%; max-width: 540px;
+      max-height: 90svh; overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(5,46,22,.3), 0 0 0 1px rgba(22,163,74,.12);
+      transform: translateY(40px) scale(.97);
+      transition: transform .4s var(--ease);
+      position: relative;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      padding: 32px 36px 0;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    }
+    .modal-close {
+      width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--g200);
+      background: var(--g50); color: var(--g700); cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: all .2s; margin-top: 4px;
+    }
+    .modal-close:hover { background: var(--g100); border-color: var(--g400); }
+
+    .modal-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--g100); border: 1px solid var(--g200);
+      border-radius: 50px; padding: 5px 14px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--g800); margin-bottom: 10px;
+    }
+    .modal-title { font-family: 'Fraunces', serif; font-size: 1.75rem; font-weight: 900; color: var(--g950); line-height: 1.15; }
+    .modal-sub { font-size: .875rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+    .modal-body { padding: 28px 36px 36px; }
+
+    /* Form fields */
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: .8rem; font-weight: 700; color: var(--g800); margin-bottom: 7px; letter-spacing: .02em; }
+    .form-label span { color: var(--g500); margin-left: 2px; }
+    .form-input {
+      width: 100%; padding: 13px 16px; border-radius: 12px;
+      border: 1.5px solid var(--g200); background: var(--white);
+      font-size: .9rem; font-family: inherit; color: var(--ink);
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .form-input:focus { border-color: var(--g500); box-shadow: 0 0 0 4px rgba(34,197,94,.12); }
+    .form-input::placeholder { color: #b0bbb6; }
+    .form-input.error { border-color: #ef4444; box-shadow: 0 0 0 4px rgba(239,68,68,.1); }
+    .form-error { font-size: .75rem; color: #ef4444; margin-top: 5px; display: none; }
+    .form-error.show { display: block; }
+
+    /* School type selector */
+    .school-type-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .school-type-btn {
+      flex: 1; min-width: 110px;
+      padding: 13px 10px; border-radius: 12px;
+      border: 1.5px solid var(--g200); background: var(--white);
+      font-size: .85rem; font-weight: 600; color: var(--g700);
+      cursor: pointer; font-family: inherit; text-align: center;
+      transition: all .2s; display: flex; flex-direction: column;
+      align-items: center; gap: 5px;
+    }
+    .school-type-btn .type-icon { font-size: 1.3rem; }
+    .school-type-btn:hover { border-color: var(--g400); background: var(--g50); }
+    .school-type-btn.selected { border-color: var(--g500); background: var(--g100); color: var(--g800); box-shadow: 0 0 0 3px rgba(34,197,94,.15); }
+    .school-type-btn.error-border { border-color: #ef4444; }
+
+    /* Plan selector (parent) */
+    .plan-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .plan-btn {
+      padding: 16px; border-radius: 14px; border: 1.5px solid var(--g200);
+      background: var(--white); cursor: pointer; font-family: inherit; text-align: left;
+      transition: all .2s;
+    }
+    .plan-btn:hover { border-color: var(--g400); background: var(--g50); }
+    .plan-btn.selected { border-color: var(--g500); background: var(--g100); box-shadow: 0 0 0 3px rgba(34,197,94,.15); }
+    .plan-btn-icon { font-size: 1.3rem; margin-bottom: 6px; display: block; }
+    .plan-btn-name { font-size: .9rem; font-weight: 700; color: var(--g900); display: block; }
+    .plan-btn-desc { font-size: .75rem; color: var(--muted); display: block; margin-top: 2px; }
+
+    /* Submit button */
+    .form-submit {
+      width: 100%; padding: 15px; border-radius: 14px;
+      background: var(--g600); color: var(--white); border: none;
+      font-size: 1rem; font-weight: 700; font-family: inherit;
+      cursor: pointer; margin-top: 8px;
+      transition: all .25s; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .form-submit:hover { background: var(--g700); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(22,163,74,.35); }
+    .form-submit:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+
+    /* Divider */
+    .form-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
+    .form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--g100); }
+    .form-divider span { font-size: .75rem; color: var(--muted); font-weight: 500; white-space: nowrap; }
+
+    /* Progress steps */
+    .form-steps { display: flex; align-items: center; gap: 0; margin-bottom: 28px; }
+    .form-step-item { display: flex; align-items: center; gap: 0; flex: 1; }
+    .form-step-circle {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      border: 2px solid var(--g200); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; color: var(--muted);
+      transition: all .3s;
+    }
+    .form-step-circle.active { background: var(--g600); border-color: var(--g600); color: var(--white); }
+    .form-step-circle.done { background: var(--g100); border-color: var(--g500); color: var(--g700); }
+    .form-step-line { flex: 1; height: 2px; background: var(--g100); transition: background .3s; }
+    .form-step-line.done { background: var(--g400); }
+
+    /* Success state */
+    .modal-success {
+      padding: 48px 36px; text-align: center;
+      display: none; flex-direction: column; align-items: center;
+    }
+    .modal-success.show { display: flex; }
+    .success-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--g100); border: 3px solid var(--g300);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin-bottom: 20px;
+      animation: pop .5s var(--ease) both;
+    }
+    .success-title { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 900; color: var(--g950); margin-bottom: 10px; }
+    .success-sub { font-size: .9rem; color: var(--muted); line-height: 1.65; max-width: 340px; }
+    .success-btn { margin-top: 28px; background: var(--g600); color: var(--white); border: none; border-radius: 50px; padding: 13px 28px; font-size: .9rem; font-weight: 700; font-family: inherit; cursor: pointer; transition: all .2s; }
+    .success-btn:hover { background: var(--g700); transform: translateY(-1px); }
+
+    /* Spinner */
+    .spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,.35); border-top-color: var(--white); border-radius: 50%; animation: spin .7s linear infinite; display: none; }
+    .form-submit.loading .spinner { display: block; }
+    .form-submit.loading .btn-text { display: none; }
+
+    /* ─────────────── REVEAL ANIMATIONS ─────────────── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+    .step-row { opacity: 0; transform: translateX(-24px); transition: opacity .6s ease, transform .6s ease; }
+    .step-row.visible { opacity: 1; transform: none; }
+
+    /* Hero entrance */
+    .hero-text > * { animation: fadeUp .7s ease both; }
+    .hero-chip   { animation-delay: .05s; }
+    .hero h1     { animation-delay: .15s; }
+    .hero-desc   { animation-delay: .25s; }
+    .hero-btns   { animation-delay: .33s; }
+    .hero-trust  { animation-delay: .4s; }
+    .hero-stats  { animation-delay: .48s; }
+    .hero-visual { animation: fadeUp .8s ease .3s both; }
+
+    @keyframes fadeUp  { from{ opacity:0; transform:translateY(28px); } to{ opacity:1; transform:none; } }
+    @keyframes slideIn { from{ opacity:0; transform:translateX(20px); } to{ opacity:1; transform:none; } }
+    @keyframes float   { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-14px); } }
+    @keyframes blink   { 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
+    @keyframes ticker  { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+    @keyframes pop     { 0%{ transform:scale(.6); opacity:0; } 80%{ transform:scale(1.1); } 100%{ transform:scale(1); opacity:1; } }
+    @keyframes spin    { to{ transform:rotate(360deg); } }
+
+    /* ─────────────── RESPONSIVE ─────────────── */
+    @media(max-width:960px){
+      .hero{ grid-template-columns:1fr; text-align:center; padding-top:100px; }
+      .hero-desc{ margin:0 auto 36px; }
+      .hero-btns{ justify-content:center; }
+      .hero-trust{ justify-content:center; }
+      .hero-visual{ order:-1; }
+      .dual-section{ grid-template-columns:1fr; }
+      .dual-panel{ border-right:none; border-bottom:1px solid rgba(255,255,255,.06); }
+      .about-grid{ grid-template-columns:1fr; gap:40px; }
+      .team-grid{ flex-direction:column; }
+      .features-bento{ grid-template-columns:1fr; }
+      .bento-card.wide{ grid-column:span 1; }
+      .footer-grid{ grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:640px){
+      .nav-links{ display:none; }
+      .hamburger{ display:flex; }
+      .hero h1{ font-size:2.4rem; }
+      .hero-stats{ grid-template-columns:1fr 1fr; }
+      .footer-grid{ grid-template-columns:1fr; }
+      .steps-timeline::before{ left:29px; }
+      .step-circle{ width:60px; height:60px; }
+      .modal{ border-radius:20px; }
+      .modal-header, .modal-body{ padding-left:24px; padding-right:24px; }
+      .plan-group{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════ NAV ════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="#">Lo<em>pay</em></a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#how">How It Works</a></li>
+      <li><a class="nav-link" href="#features">Features</a></li>
+      <li><a class="nav-link" href="#about">About</a></li>
+      <li><a class="nav-link" href="#team">Team</a></li>
+      <li><a class="nav-link" href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="openModal('school')">Get Started</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+
+  <div class="hero-text">
+    <div class="chip hero-chip"><span class="chip-dot"></span>Nigeria's School Fee Payment Platform</div>
+    <h1>Pay school fees<br/><em>on your terms.</em></h1>
+    <p class="hero-desc">Lopay lets parents split school fees into flexible weekly or monthly installments — while schools receive every payment instantly, every single time.</p>
+    <div class="hero-btns">
+      <button class="btn-green" onclick="openModal('school')">Register Your School →</button>
+      <button class="btn-outline" onclick="openModal('parent')">I'm a Parent — Sign Up</button>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-avatars"><span>OA</span><span>TB</span><span>YC</span><span>+</span></div>
+      <span>Trusted by schools &amp; parents across Nigeria</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-val">₦0</div><div class="hero-stat-lbl">School signup cost</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">2×</div><div class="hero-stat-lbl">Payment plans</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">Live</div><div class="hero-stat-lbl">Real-time tracking</div></div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div style="position:relative;">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <div><div class="phone-header">Good morning 👋</div><div class="phone-sub">Ada's School Payments</div></div>
+            <div class="phone-balance">
+              <div class="phone-balance-label">Remaining Balance</div>
+              <div class="phone-balance-amount">₦45,000</div>
+              <div class="phone-balance-sub">₦15,000 paid of ₦60,000 total</div>
+            </div>
+            <div>
+              <div class="phone-progress-label"><span>Term Progress</span><span>25%</span></div>
+              <div class="phone-progress-bar"><div class="phone-progress-fill"></div></div>
+            </div>
+            <div class="phone-sub" style="font-weight:700;color:var(--g800);">Recent Payments</div>
+            <div class="phone-txns">
+              <div class="phone-txn"><div class="phone-txn-icon">✅</div><div class="phone-txn-label"><div class="phone-txn-name">Weekly installment</div><div class="phone-txn-date">Today, 9:14 AM</div></div><div class="phone-txn-amt">₦5,000</div></div>
+              <div class="phone-txn"><div class="phone-txn-icon">✅</div><div class="phone-txn-label"><div class="phone-txn-name">Weekly installment</div><div class="phone-txn-date">7 days ago</div></div><div class="phone-txn-amt">₦5,000</div></div>
+              <div class="phone-txn"><div class="phone-txn-icon">✅</div><div class="phone-txn-label"><div class="phone-txn-name">Weekly installment</div><div class="phone-txn-date">14 days ago</div></div><div class="phone-txn-amt">₦5,000</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="badge-pos1"><div class="phone-badge">🏫 School received ₦5,000</div></div>
+      <div class="badge-pos2"><div class="phone-badge">🔔 Payment confirmed!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TICKER ════════════ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">🏫 Schools get paid instantly <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">💳 Weekly or monthly plans <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">📊 Real-time payment tracking <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">🔒 Bank-grade security <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">⚡ Instant remittance <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">🇳🇬 Built for Nigeria <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">🏫 Schools get paid instantly <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">💳 Weekly or monthly plans <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">📊 Real-time payment tracking <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">🔒 Bank-grade security <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">⚡ Instant remittance <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">🇳🇬 Built for Nigeria <span class="ticker-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- ════════════ HOW IT WORKS ════════════ -->
+<section class="section how-section" id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Five steps. <em>Zero stress.</em></h2>
+      <p class="section-sub">From fee setup to real-time tracking — the whole process is smooth for everyone.</p>
+    </div>
+    <div class="steps-timeline">
+      <div class="step-row"><div class="step-circle"><div class="step-circle-num">STEP</div><div class="step-circle-icon">🏫</div></div><div class="step-body-wrap"><div class="step-title">School Sets the Fees</div><div class="step-desc">The school administrator logs into Lopay and sets the total tuition fee for the term. Everything is configured once and ready for parents to see.</div></div></div>
+      <div class="step-row"><div class="step-circle"><div class="step-circle-num">STEP</div><div class="step-circle-icon">📅</div></div><div class="step-body-wrap"><div class="step-title">Parents Choose a Plan</div><div class="step-desc">Parents browse the available payment schedules and pick the one that fits — weekly or monthly. No pressure, no guesswork.</div></div></div>
+      <div class="step-row"><div class="step-circle"><div class="step-circle-num">STEP</div><div class="step-circle-icon">💳</div></div><div class="step-body-wrap"><div class="step-title">Parents Pay Installments</div><div class="step-desc">Payments are made securely through Lopay's platform. No bank queues, no stress — just a few taps from a phone.</div></div></div>
+      <div class="step-row"><div class="step-circle"><div class="step-circle-num">STEP</div><div class="step-circle-icon">🏦</div></div><div class="step-body-wrap"><div class="step-title">Lopay Remits Instantly</div><div class="step-desc">The moment a parent makes a payment, Lopay remits it directly to the school's registered bank account. Schools never wait.</div></div></div>
+      <div class="step-row"><div class="step-circle"><div class="step-circle-num">STEP</div><div class="step-circle-icon">📊</div></div><div class="step-body-wrap"><div class="step-title">Everyone Tracks in Real Time</div><div class="step-desc">Both parents and schools have live dashboards showing payment history, outstanding balances, and upcoming schedules.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ DUAL ════════════ -->
+<div class="dual-section" id="features">
+  <div class="dual-panel reveal-left">
+    <div class="dual-tag"><div class="dual-dot"></div>For Schools</div>
+    <h3>Never chase a fee payment again.</h3>
+    <p>Lopay gives school owners a single, clean dashboard to manage all collections, track outstanding balances, and receive remittances the second each parent pays.</p>
+    <ul class="check-list">
+      <li><div class="check-icon">✓</div>Set and manage tuition fees per term</li>
+      <li><div class="check-icon">✓</div>Instant remittance on every installment received</li>
+      <li><div class="check-icon">✓</div>Real-time visibility — see who has paid and who hasn't</li>
+      <li><div class="check-icon">✓</div>Detailed reports for accounting and end-of-term audits</li>
+      <li><div class="check-icon">✓</div>Reduce admin overhead and manual follow-ups forever</li>
+    </ul>
+  </div>
+  <div class="dual-panel reveal-right">
+    <div class="dual-tag"><div class="dual-dot"></div>For Parents</div>
+    <h3>Quality education, without the lump-sum pressure.</h3>
+    <p>Lopay lets you put your children in the best schools without losing sleep over a single massive term payment. Choose a plan, pay gradually, stay in full control.</p>
+    <ul class="check-list">
+      <li><div class="check-icon">✓</div>Choose weekly or monthly installment schedules</li>
+      <li><div class="check-icon">✓</div>Pay securely from your phone, anytime anywhere</li>
+      <li><div class="check-icon">✓</div>Track every payment and balance in real time</li>
+      <li><div class="check-icon">✓</div>Smart reminders so you never miss a payment</li>
+      <li><div class="check-icon">✓</div>Manage multiple children across different schools</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════ FEATURES ════════════ -->
+<section class="section features-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Platform Features</div>
+      <h2 class="section-title">Built for <em>peace of mind.</em></h2>
+      <p class="section-sub">Every feature on Lopay exists to make school fee payments completely effortless.</p>
+    </div>
+    <div class="features-bento">
+      <div class="bento-card wide reveal"><div class="bento-corner"></div><div class="feat-icon-wrap">💰</div><div class="feat-title">Flexible Installment Plans</div><div class="feat-desc">Weekly or monthly schedules that adapt to any family's cash flow — no lump sums, no financial strain, no compromises on your child's education.</div><div class="feat-tag">Core Feature</div></div>
+      <div class="bento-card dark reveal"><div class="feat-icon-wrap">⚡</div><div class="feat-title">Instant Remittance</div><div class="feat-desc">Schools don't wait a day. Every parent payment hits the school's account immediately.</div><div class="feat-tag">For Schools</div></div>
+      <div class="bento-card reveal"><div class="feat-icon-wrap">📱</div><div class="feat-title">Real-Time Dashboard</div><div class="feat-desc">Live transaction history and balance tracking for both parents and school administrators.</div><div class="feat-tag">Both Sides</div></div>
+      <div class="bento-card reveal"><div class="feat-icon-wrap">🔒</div><div class="feat-title">Bank-Grade Security</div><div class="feat-desc">All payments are end-to-end encrypted and processed through regulated payment channels.</div><div class="feat-tag">Always On</div></div>
+      <div class="bento-card reveal"><div class="feat-icon-wrap">🔔</div><div class="feat-title">Smart Reminders</div><div class="feat-desc">Automated payment nudges keep parents on schedule and schools reliably informed — zero manual effort.</div><div class="feat-tag">Automated</div></div>
+      <div class="bento-card dark reveal"><div class="feat-icon-wrap">📈</div><div class="feat-title">Financial Reporting</div><div class="feat-desc">Detailed term-by-term summaries that make accounting and audits effortless for school administrators.</div><div class="feat-tag">For Schools</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ ABOUT ════════════ -->
+<section class="section about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left reveal-left">
+        <div class="section-label">About Lopay</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Building a Nigeria where <em>no child misses school</em> over unpaid fees.</h2>
+        <p>Lopay was born from a clear observation: millions of Nigerian parents deeply want the best education for their children, yet the pressure of a full lump-sum payment every term forces many to withdraw or delay enrollment.</p>
+        <p>We built Lopay to close that gap — a platform that makes payments <strong style="color:var(--g800)">flexible for parents</strong> and <strong style="color:var(--g800)">reliable for schools</strong> without compromise on either side.</p>
+        <div class="about-mission-box">
+          <h4>Our Mission</h4>
+          <p>To make quality education financially accessible for every Nigerian family by removing the barrier of lump-sum school fee payments — one installment at a time.</p>
+        </div>
+        <div class="about-values" style="margin-top:24px;">
+          <div class="about-value"><div class="about-value-icon">🎯</div><div><h5>Accessibility First</h5><p>Financial constraints should never be the reason a child misses school.</p></div></div>
+          <div class="about-value"><div class="about-value-icon">🤝</div><div><h5>Trust & Transparency</h5><p>Every naira tracked, every payment visible, every school paid exactly what they're owed.</p></div></div>
+          <div class="about-value"><div class="about-value-icon">⚡</div><div><h5>Speed & Reliability</h5><p>Instant remittance, real-time dashboards, and zero delays — always.</p></div></div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="about-stats-grid">
+          <div class="about-stat-card"><div class="about-stat-val">₦0</div><div class="about-stat-lbl">Upfront cost to register a school</div></div>
+          <div class="about-stat-card"><div class="about-stat-val">2</div><div class="about-stat-lbl">Payment plans: weekly &amp; monthly</div></div>
+          <div class="about-stat-card"><div class="about-stat-val">100%</div><div class="about-stat-lbl">Of each installment remitted instantly</div></div>
+          <div class="about-stat-card"><div class="about-stat-val">Live</div><div class="about-stat-lbl">Real-time tracking for all parties</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TEAM ════════════ -->
+<section class="section team-section" id="team">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">The Team</div>
+      <h2 class="section-title">The people <em>building Lopay.</em></h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-stripe"></div>
+        <div class="team-avatar">ON</div>
+        <div class="team-role">Founder &amp; CEO</div>
+        <div class="team-name">Okafor Samuel Nonso</div>
+        <div class="team-bio">Okafor Samuel Nonso is the visionary behind Lopay — on a mission to make quality education financially accessible for every Nigerian family by eliminating the pressure of lump-sum school fee payments.</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-stripe"></div>
+        <div class="team-avatar" style="background:var(--g600);">TO</div>
+        <div class="team-role">Chief Operating Officer</div>
+        <div class="team-name">Temitope Olalekan Ogunrekun</div>
+        <div class="team-bio">Temitope Olalekan Ogunrekun leads Lopay's operations — ensuring seamless experiences for both parents and schools, from onboarding through to daily payment flows and platform reliability.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CTA ════════════ -->
+<section class="cta-section" id="contact">
+  <div class="cta-dots"></div>
+  <h2>Ready to transform how your school collects fees?</h2>
+  <p>Join Lopay today — it's completely free to get started for both schools and parents.</p>
+  <div class="cta-btns">
+    <button class="btn-white" onclick="openModal('school')">Register Your School</button>
+    <button class="btn-ghost-white" onclick="openModal('parent')">I'm a Parent — Sign Up</button>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a class="footer-logo" href="#">Lo<em>pay</em></a>
+      <p class="footer-desc">Flexible school fee payments for parents. Reliable, on-time collection for schools across Nigeria.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#" aria-label="Twitter">𝕏</a>
+        <a class="social-btn" href="#" aria-label="Instagram">◎</a>
+        <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
+        <a class="social-btn" href="#" aria-label="WhatsApp">✆</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Product</h5><ul class="footer-links"><li><a href="#how">How It Works</a></li><li><a href="#features">For Schools</a></li><li><a href="#features">For Parents</a></li><li><a href="#">Pricing</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul class="footer-links"><li><a href="#about">About Us</a></li><li><a href="#team">Team</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li></ul></div>
+    <div class="footer-col"><h5>Legal</h5><ul class="footer-links"><li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li><li><a href="terms.html" target="_blank">Terms of Service</a></li><li><a href="#">Cookie Policy</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Lopay Financial Technologies Ltd. All rights reserved.</p>
+    <div class="status-pill"><div class="status-dot"></div>All systems operational</div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     SCHOOL REGISTRATION MODAL
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="schoolModal" role="dialog" aria-modal="true" aria-labelledby="schoolModalTitle">
+  <div class="modal">
+    <!-- Header -->
+    <div class="modal-header">
+      <div>
+        <div class="modal-badge">🏫 School Registration</div>
+        <h2 class="modal-title" id="schoolModalTitle">Register Your School</h2>
+        <p class="modal-sub">Join Lopay and start receiving fee payments instantly — setup takes less than 3 minutes.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('school')" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Form -->
+    <div class="modal-body" id="schoolForm">
+      <div class="form-group">
+        <label class="form-label" for="s-fullname">Full Name <span>*</span></label>
+        <input class="form-input" id="s-fullname" type="text" placeholder="e.g. Adebayo Olusegun" autocomplete="name" />
+        <div class="form-error" id="s-fullname-err">Please enter your full name</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="s-schoolname">School Name <span>*</span></label>
+        <input class="form-input" id="s-schoolname" type="text" placeholder="e.g. Greenfield Academy" />
+        <div class="form-error" id="s-schoolname-err">Please enter your school name</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="s-address">School Address <span>*</span></label>
+        <input class="form-input" id="s-address" type="text" placeholder="e.g. 14 Admiralty Way, Lekki Phase 1, Lagos" />
+        <div class="form-error" id="s-address-err">Please enter your school address</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="s-phone">Phone Number <span>*</span></label>
+        <input class="form-input" id="s-phone" type="tel" placeholder="e.g. 08012345678" autocomplete="tel" />
+        <div class="form-error" id="s-phone-err">Please enter a valid Nigerian phone number</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">School Type <span>*</span></label>
+        <div class="school-type-group" id="schoolTypeGroup">
+          <button type="button" class="school-type-btn" data-type="primary" onclick="selectSchoolType('primary')">
+            <span class="type-icon">📚</span>
+            Primary School
+          </button>
+          <button type="button" class="school-type-btn" data-type="secondary" onclick="selectSchoolType('secondary')">
+            <span class="type-icon">🎓</span>
+            Secondary School
+          </button>
+          <button type="button" class="school-type-btn" data-type="both" onclick="selectSchoolType('both')">
+            <span class="type-icon">🏫</span>
+            Both
+          </button>
+        </div>
+        <div class="form-error" id="s-type-err">Please select your school type</div>
+      </div>
+
+      <div class="form-divider"><span>By registering you agree to Lopay's <a href="terms.html" target="_blank" style="color:var(--g700);font-weight:600;">Terms</a> &amp; <a href="privacy-policy.html" target="_blank" style="color:var(--g700);font-weight:600;">Privacy Policy</a></span></div>
+
+      <button class="form-submit" id="schoolSubmitBtn" onclick="submitSchool()">
+        <span class="btn-text">Create School Account →</span>
+        <div class="spinner"></div>
+      </button>
+    </div>
+
+    <!-- Success -->
+    <div class="modal-success" id="schoolSuccess">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">Welcome to Lopay!</div>
+      <p class="success-sub">Your school registration was submitted successfully. Our team will review your details and reach out within <strong>24 hours</strong> to complete your onboarding.</p>
+      <button class="success-btn" onclick="closeModal('school')">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PARENT REGISTRATION MODAL
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="parentModal" role="dialog" aria-modal="true" aria-labelledby="parentModalTitle">
+  <div class="modal">
+    <!-- Header -->
+    <div class="modal-header">
+      <div>
+        <div class="modal-badge">👨‍👩‍👧 Parent Sign Up</div>
+        <h2 class="modal-title" id="parentModalTitle">Create Your Parent Account</h2>
+        <p class="modal-sub">Start paying your child's school fees in easy installments — no more lump-sum stress.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('parent')" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Form -->
+    <div class="modal-body" id="parentForm">
+      <div class="form-group">
+        <label class="form-label" for="p-fullname">Full Name <span>*</span></label>
+        <input class="form-input" id="p-fullname" type="text" placeholder="e.g. Chidinma Okafor" autocomplete="name" />
+        <div class="form-error" id="p-fullname-err">Please enter your full name</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="p-email">Email Address <span>*</span></label>
+        <input class="form-input" id="p-email" type="email" placeholder="e.g. chidinma@gmail.com" autocomplete="email" />
+        <div class="form-error" id="p-email-err">Please enter a valid email address</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="p-phone">Phone Number <span>*</span></label>
+        <input class="form-input" id="p-phone" type="tel" placeholder="e.g. 09087654321" autocomplete="tel" />
+        <div class="form-error" id="p-phone-err">Please enter a valid Nigerian phone number</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="p-child">Child's Full Name <span>*</span></label>
+        <input class="form-input" id="p-child" type="text" placeholder="e.g. Ada Okafor" />
+        <div class="form-error" id="p-child-err">Please enter your child's name</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="p-school">Child's School Name <span>*</span></label>
+        <input class="form-input" id="p-school" type="text" placeholder="e.g. Greenfield Academy, Lekki" />
+        <div class="form-error" id="p-school-err">Please enter your child's school</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Preferred Payment Plan <span>*</span></label>
+        <div class="plan-group" id="planGroup">
+          <button type="button" class="plan-btn" data-plan="weekly" onclick="selectPlan('weekly')">
+            <span class="plan-btn-icon">📅</span>
+            <span class="plan-btn-name">Weekly</span>
+            <span class="plan-btn-desc">Spread payments across each week of term</span>
+          </button>
+          <button type="button" class="plan-btn" data-plan="monthly" onclick="selectPlan('monthly')">
+            <span class="plan-btn-icon">📆</span>
+            <span class="plan-btn-name">Monthly</span>
+            <span class="plan-btn-desc">One payment per month, easy to budget</span>
+          </button>
+        </div>
+        <div class="form-error" id="p-plan-err">Please select a payment plan</div>
+      </div>
+
+      <div class="form-divider"><span>By signing up you agree to Lopay's <a href="terms.html" target="_blank" style="color:var(--g700);font-weight:600;">Terms</a> &amp; <a href="privacy-policy.html" target="_blank" style="color:var(--g700);font-weight:600;">Privacy Policy</a></span></div>
+
+      <button class="form-submit" id="parentSubmitBtn" onclick="submitParent()">
+        <span class="btn-text">Create Parent Account →</span>
+        <div class="spinner"></div>
+      </button>
+    </div>
+
+    <!-- Success -->
+    <div class="modal-success" id="parentSuccess">
+      <div class="success-icon">✅</div>
+      <div class="success-title">You're all set!</div>
+      <p class="success-sub">Your parent account has been created. We'll send a confirmation and next steps to your email address within a few minutes. Welcome to Lopay!</p>
+      <button class="success-btn" onclick="closeModal('parent')">Get Started</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ SCRIPTS ════════════ -->
+<script>
+  /* ── Nav scroll ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 48);
+  }, { passive: true });
+
+  /* ── Hamburger ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '72px';
+    navLinks.style.left = '0'; navLinks.style.right = '0';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.padding = '16px 5%';
+    navLinks.style.background = 'rgba(5,46,22,.97)';
+    navLinks.style.gap = '18px';
+  });
+
+  /* ── Scroll reveal ── */
+  const allReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .step-row');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const isStep = el.classList.contains('step-row');
+      const idx = isStep ? [...document.querySelectorAll('.step-row')].indexOf(el) : 0;
+      setTimeout(() => el.classList.add('visible'), isStep ? idx * 120 : 0);
+      revealObs.unobserve(el);
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  allReveal.forEach(el => revealObs.observe(el));
+
+  /* ── Stagger bento ── */
+  document.querySelectorAll('.bento-card.reveal').forEach((c, i) => { c.style.transitionDelay = `${i * 70}ms`; });
+
+  /* ── Modal open/close ── */
+  let selectedSchoolType = '';
+  let selectedPlan = '';
+
+  function openModal(type) {
+    const id = type === 'school' ? 'schoolModal' : 'parentModal';
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(type) {
+    const id = type === 'school' ? 'schoolModal' : 'parentModal';
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* Close on overlay click */
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  /* Close on Escape */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+
+  /* ── School type selector ── */
+  function selectSchoolType(type) {
+    selectedSchoolType = type;
+    document.querySelectorAll('.school-type-btn').forEach(btn => {
+      btn.classList.toggle('selected', btn.dataset.type === type);
+      btn.classList.remove('error-border');
+    });
+    document.getElementById('s-type-err').classList.remove('show');
+  }
+
+  /* ── Plan selector ── */
+  function selectPlan(plan) {
+    selectedPlan = plan;
+    document.querySelectorAll('.plan-btn').forEach(btn => {
+      btn.classList.toggle('selected', btn.dataset.plan === plan);
+    });
+    document.getElementById('p-plan-err').classList.remove('show');
+  }
+
+  /* ── Validators ── */
+  function validateField(id, errId, checkFn) {
+    const input = document.getElementById(id);
+    const err   = document.getElementById(errId);
+    const valid = checkFn(input.value.trim());
+    input.classList.toggle('error', !valid);
+    err.classList.toggle('show', !valid);
+    return valid;
+  }
+  const notEmpty  = v => v.length > 1;
+  const validEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const validPhone = v => /^(\+?234|0)[789][01]\d{8}$/.test(v.replace(/\s/g,''));
+
+  /* ── Submit school form ── */
+  function submitSchool() {
+    const v1 = validateField('s-fullname',   's-fullname-err',   notEmpty);
+    const v2 = validateField('s-schoolname', 's-schoolname-err', notEmpty);
+    const v3 = validateField('s-address',    's-address-err',    notEmpty);
+    const v4 = validateField('s-phone',      's-phone-err',      validPhone);
+
+    let typeValid = !!selectedSchoolType;
+    if (!typeValid) {
+      document.querySelectorAll('.school-type-btn').forEach(b => b.classList.add('error-border'));
+      document.getElementById('s-type-err').classList.add('show');
+    }
+
+    if (!v1 || !v2 || !v3 || !v4 || !typeValid) return;
+
+    const btn = document.getElementById('schoolSubmitBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      document.getElementById('schoolForm').style.display = 'none';
+      document.getElementById('schoolSuccess').classList.add('show');
+      /* Reset */
+      ['s-fullname','s-schoolname','s-address','s-phone'].forEach(id => document.getElementById(id).value = '');
+      selectedSchoolType = '';
+      document.querySelectorAll('.school-type-btn').forEach(b => b.classList.remove('selected'));
+    }, 1800);
+  }
+
+  /* ── Submit parent form ── */
+  function submitParent() {
+    const v1 = validateField('p-fullname', 'p-fullname-err', notEmpty);
+    const v2 = validateField('p-email',    'p-email-err',    validEmail);
+    const v3 = validateField('p-phone',    'p-phone-err',    validPhone);
+    const v4 = validateField('p-child',    'p-child-err',    notEmpty);
+    const v5 = validateField('p-school',   'p-school-err',   notEmpty);
+
+    let planValid = !!selectedPlan;
+    if (!planValid) document.getElementById('p-plan-err').classList.add('show');
+
+    if (!v1 || !v2 || !v3 || !v4 || !v5 || !planValid) return;
+
+    const btn = document.getElementById('parentSubmitBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      document.getElementById('parentForm').style.display = 'none';
+      document.getElementById('parentSuccess').classList.add('show');
+      ['p-fullname','p-email','p-phone','p-child','p-school'].forEach(id => document.getElementById(id).value = '');
+      selectedPlan = '';
+      document.querySelectorAll('.plan-btn').forEach(b => b.classList.remove('selected'));
+    }, 1800);
+  }
+
+  /* Clear field error on input */
+  document.querySelectorAll('.form-input').forEach(input => {
+    input.addEventListener('input', () => {
+      input.classList.remove('error');
+      const errEl = document.getElementById(input.id + '-err');
+      if (errEl) errEl.classList.remove('show');
+    });
+  });
+</script>
+</body>
+</html>

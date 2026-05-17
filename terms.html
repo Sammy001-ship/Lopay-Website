@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Lopay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #166534;
+      --navy-mid: #14532D;
+      --gold: #22C55E;
+      --gold-light: #4ADE80;
+      --cream: #F0FDF4;
+      --cream-dark: #DCFCE7;
+      --white: #FFFFFF;
+      --text: #1a1a1a;
+      --text-muted: #555;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(20,83,45,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.7rem; font-weight: 900;
+      color: var(--white); text-decoration: none; letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back::before { content: '←'; font-size: 1rem; }
+
+    .page-hero {
+      background: var(--navy-mid);
+      padding: 72px 6% 56px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(74,222,128,0.08) 0%, transparent 70%);
+    }
+    .page-hero-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 50px; padding: 6px 16px; margin-bottom: 20px;
+    }
+    .page-hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; color: var(--white); line-height: 1.1;
+      max-width: 700px;
+    }
+    .page-hero-meta {
+      margin-top: 16px; font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .legal-wrap {
+      max-width: 820px; margin: 0 auto;
+      padding: 64px 6% 100px;
+    }
+    .toc {
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      border-radius: 16px; padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+    .toc h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 14px;
+    }
+    .toc ol {
+      padding-left: 18px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .toc ol li a {
+      font-size: 0.88rem; color: var(--navy);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .toc ol li a:hover { color: var(--gold); }
+
+    .legal-section { margin-bottom: 52px; }
+    .legal-section h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--navy); margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--cream-dark);
+    }
+    .legal-section h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--navy); margin: 24px 0 10px;
+    }
+    .legal-section p {
+      font-size: 0.95rem; color: var(--text-muted);
+      line-height: 1.8; margin-bottom: 14px;
+    }
+    .legal-section ul, .legal-section ol {
+      padding-left: 20px; display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .legal-section li {
+      font-size: 0.95rem; color: var(--text-muted); line-height: 1.7;
+    }
+    .legal-section strong { color: var(--text); font-weight: 600; }
+    .legal-highlight {
+      background: var(--cream-dark);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px; margin: 20px 0;
+      font-size: 0.92rem; color: var(--navy);
+      line-height: 1.7;
+    }
+
+    .contact-box {
+      background: var(--navy-mid);
+      border-radius: 20px; padding: 40px 36px;
+      text-align: center; margin-top: 60px;
+    }
+    .contact-box h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .contact-box p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .contact-box a {
+      display: inline-block;
+      background: var(--gold); color: var(--navy-mid);
+      border-radius: 50px; padding: 12px 28px;
+      font-size: 0.9rem; font-weight: 700;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-box a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,197,94,0.4); }
+
+    footer {
+      background: var(--navy-mid);
+      padding: 28px 6%;
+      text-align: center;
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Lo<span>pay</span></a>
+  <a class="nav-back" href="index.html">Back to Home</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-tag">Legal</div>
+  <h1>Terms of Service</h1>
+  <p class="page-hero-meta">Last updated: April 17, 2025 &nbsp;·&nbsp; Effective: April 17, 2025</p>
+</div>
+
+<div class="legal-wrap">
+
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#t1">Acceptance of Terms</a></li>
+      <li><a href="#t2">Eligibility</a></li>
+      <li><a href="#t3">Description of the Service</a></li>
+      <li><a href="#t4">Account Registration</a></li>
+      <li><a href="#t5">User Obligations</a></li>
+      <li><a href="#t6">Payment Terms</a></li>
+      <li><a href="#t7">School Administrator Terms</a></li>
+      <li><a href="#t8">Fees & Charges</a></li>
+      <li><a href="#t9">Intellectual Property</a></li>
+      <li><a href="#t10">Prohibited Conduct</a></li>
+      <li><a href="#t11">Disclaimers & Limitation of Liability</a></li>
+      <li><a href="#t12">Indemnification</a></li>
+      <li><a href="#t13">Termination</a></li>
+      <li><a href="#t14">Governing Law & Disputes</a></li>
+      <li><a href="#t15">Changes to Terms</a></li>
+      <li><a href="#t16">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <div class="legal-highlight">
+    Please read these Terms of Service carefully before using the Lopay platform. By creating an account or using any part of our service, you agree to be bound by these terms. If you do not agree, do not use Lopay.
+  </div>
+
+  <div class="legal-section" id="t1">
+    <h2>1. Acceptance of Terms</h2>
+    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you", or "your") and <strong>Lopay Financial Technologies Ltd.</strong> ("Lopay", "we", "us", or "our"), governing your access to and use of the Lopay platform, website, and mobile application (collectively, the "Service").</p>
+    <p>By registering for, accessing, or using the Service in any manner, you confirm that you have read, understood, and agreed to these Terms, along with our <a href="privacy-policy.html" style="color:var(--navy);font-weight:600;">Privacy Policy</a>, which is incorporated herein by reference.</p>
+  </div>
+
+  <div class="legal-section" id="t2">
+    <h2>2. Eligibility</h2>
+    <p>To use the Lopay platform, you must:</p>
+    <ul>
+      <li>Be at least <strong>18 years of age</strong>.</li>
+      <li>Be a legal resident or registered entity in Nigeria.</li>
+      <li>Have the legal capacity to enter into binding contracts.</li>
+      <li>Not have been previously suspended or removed from the Lopay platform.</li>
+    </ul>
+    <p>By using the Service, you represent and warrant that you meet all of the above eligibility requirements. If you are registering as a school, you further represent that you have the authority to bind that institution to these Terms.</p>
+  </div>
+
+  <div class="legal-section" id="t3">
+    <h2>3. Description of the Service</h2>
+    <p>Lopay is a financial technology platform that facilitates flexible school fee payments. Specifically, the Service enables:</p>
+    <ul>
+      <li><strong>School Administrators</strong> to register their institution, set tuition fees, and receive remittances as parents make installment payments.</li>
+      <li><strong>Parents/Guardians</strong> to select a payment plan (weekly or monthly), make installment payments toward their child's school fees, and track payment history in real time.</li>
+    </ul>
+    <p>Lopay acts as a technology intermediary and payment facilitation platform. We are not a bank, lender, or financial institution. Lopay does not extend credit or loans to users. All funds paid through the platform are held in trust and remitted to schools promptly upon each payment.</p>
+  </div>
+
+  <div class="legal-section" id="t4">
+    <h2>4. Account Registration</h2>
+    <h3>4.1 Creating an Account</h3>
+    <p>To access the Service, you must create an account by providing accurate, complete, and up-to-date information including your full name, email address, phone number, and any other details required for identity verification.</p>
+    <h3>4.2 Account Security</h3>
+    <p>You are solely responsible for maintaining the confidentiality of your login credentials and for all activity that occurs under your account. You agree to:</p>
+    <ul>
+      <li>Choose a strong, unique password and not share it with anyone.</li>
+      <li>Log out of your account after each session on shared devices.</li>
+      <li>Notify us immediately at <strong>support@lopay.ng</strong> if you suspect any unauthorised access to your account.</li>
+    </ul>
+    <p>Lopay will not be liable for any loss or damage arising from your failure to protect your account credentials.</p>
+    <h3>4.3 One Account Per User</h3>
+    <p>Each individual or school may maintain only one active account on Lopay. Creating multiple accounts to circumvent restrictions or policies is prohibited.</p>
+  </div>
+
+  <div class="legal-section" id="t5">
+    <h2>5. User Obligations</h2>
+    <p>By using the Lopay Service, you agree to:</p>
+    <ul>
+      <li>Provide accurate and truthful information at all times.</li>
+      <li>Use the Service only for lawful purposes in accordance with these Terms and applicable Nigerian law.</li>
+      <li>Not attempt to manipulate, defraud, or abuse the payment system.</li>
+      <li>Comply with all applicable anti-money laundering (AML) and Know Your Customer (KYC) requirements.</li>
+      <li>Not impersonate any person or entity or falsely represent your affiliation with any school.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="t6">
+    <h2>6. Payment Terms</h2>
+    <h3>6.1 Installment Plans</h3>
+    <p>Parents may elect to pay school fees through weekly or monthly installment plans as offered by Lopay. The total fee amount and installment schedule are determined by the school and communicated to parents at the time of enrollment on the platform.</p>
+    <h3>6.2 Payment Processing</h3>
+    <p>All payments are processed through licensed third-party payment service providers. By initiating a payment, you authorise Lopay and its payment processors to charge the designated payment method for the installment amount.</p>
+    <h3>6.3 Failed & Missed Payments</h3>
+    <p>If a payment fails due to insufficient funds or any other reason, you will be notified and given an opportunity to retry. Persistent failure to make scheduled payments may result in suspension of your payment plan and notification to the relevant school. Lopay is not responsible for any consequences arising from a school's response to missed payments.</p>
+    <h3>6.4 Refunds</h3>
+    <p>Payments made through Lopay are generally non-refundable once remitted to a school. Refund disputes must be resolved directly between the parent and the school. Lopay may assist in facilitating communication but does not guarantee any refund outcome. In cases of proven technical error or unauthorised transaction, Lopay will investigate and may process a refund at its sole discretion.</p>
+    <h3>6.5 Currency</h3>
+    <p>All transactions on the Lopay platform are conducted in Nigerian Naira (NGN) unless otherwise specified.</p>
+  </div>
+
+  <div class="legal-section" id="t7">
+    <h2>7. School Administrator Terms</h2>
+    <h3>7.1 Registration & Verification</h3>
+    <p>Schools must complete Lopay's verification process before going live on the platform. This includes providing valid registration documents and bank account details. Lopay reserves the right to reject or suspend any school account at its discretion.</p>
+    <h3>7.2 Fee Setting</h3>
+    <p>Schools are solely responsible for accurately setting their tuition fees on the Lopay platform. Lopay is not responsible for errors made by school administrators in fee configuration.</p>
+    <h3>7.3 Remittance</h3>
+    <p>Lopay will remit each parent installment payment to the school's registered bank account as specified in the remittance schedule. Schools acknowledge that payment timelines may vary based on the payment processor and banking system.</p>
+    <h3>7.4 School Responsibilities</h3>
+    <p>Schools agree to honour enrollment and services for students whose parents are making payments in good standing through Lopay and to communicate any fee changes promptly so that payment plans may be updated accordingly.</p>
+  </div>
+
+  <div class="legal-section" id="t8">
+    <h2>8. Fees & Charges</h2>
+    <p>Lopay may charge service fees for use of the platform. These fees, if applicable, will be clearly disclosed to you before you complete any transaction. We reserve the right to change our fee structure with reasonable prior notice to users.</p>
+    <p>Current fee information is available in your account dashboard. Continued use of the Service after a fee change constitutes acceptance of the new fee structure.</p>
+  </div>
+
+  <div class="legal-section" id="t9">
+    <h2>9. Intellectual Property</h2>
+    <p>All content, features, and functionality of the Lopay platform — including but not limited to the Lopay name, logo, interface design, software, text, and graphics — are the exclusive property of Lopay Financial Technologies Ltd. and are protected by Nigerian and international intellectual property laws.</p>
+    <p>You may not copy, reproduce, distribute, modify, create derivative works of, or publicly display any part of the Lopay platform without our prior written consent.</p>
+  </div>
+
+  <div class="legal-section" id="t10">
+    <h2>10. Prohibited Conduct</h2>
+    <p>You agree not to use the Lopay platform to:</p>
+    <ul>
+      <li>Engage in any fraudulent, deceptive, or unlawful activity.</li>
+      <li>Launder money or fund illegal activities.</li>
+      <li>Upload or transmit viruses, malware, or any other malicious code.</li>
+      <li>Attempt to gain unauthorised access to any part of the platform or another user's account.</li>
+      <li>Scrape, crawl, or use automated means to access or collect data from the platform.</li>
+      <li>Harass, abuse, or harm another person or entity through the platform.</li>
+      <li>Violate any applicable local, national, or international law or regulation.</li>
+    </ul>
+    <p>Violation of these prohibitions may result in immediate account suspension or termination, and may be reported to law enforcement authorities.</p>
+  </div>
+
+  <div class="legal-section" id="t11">
+    <h2>11. Disclaimers & Limitation of Liability</h2>
+    <h3>11.1 Service Disclaimer</h3>
+    <p>The Lopay Service is provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied. We do not warrant that the Service will be uninterrupted, error-free, or free of viruses or other harmful components.</p>
+    <h3>11.2 Limitation of Liability</h3>
+    <p>To the maximum extent permitted by applicable law, Lopay Financial Technologies Ltd., its directors, officers, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, goodwill, or other intangible losses, arising out of or in connection with your use of the Service.</p>
+    <p>In any event, our total liability to you for any claims arising from your use of the Service shall not exceed the total amount of fees you paid to Lopay in the three (3) months preceding the claim.</p>
+    <div class="legal-highlight">Lopay is a facilitator of payments, not a guarantor of school services. Any disputes regarding the quality of education or school conduct must be resolved directly with the relevant school.</div>
+  </div>
+
+  <div class="legal-section" id="t12">
+    <h2>12. Indemnification</h2>
+    <p>You agree to indemnify, defend, and hold harmless Lopay Financial Technologies Ltd. and its officers, directors, employees, agents, and partners from and against any claims, liabilities, damages, losses, costs, or expenses (including reasonable legal fees) arising out of or related to:</p>
+    <ul>
+      <li>Your use of or access to the Service.</li>
+      <li>Your violation of these Terms.</li>
+      <li>Your violation of any applicable law or third-party rights.</li>
+      <li>Any content you submit through the Service.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="t13">
+    <h2>13. Termination</h2>
+    <h3>13.1 Termination by You</h3>
+    <p>You may close your Lopay account at any time by contacting us at <strong>support@lopay.ng</strong>. Note that you remain responsible for all outstanding payment obligations at the time of termination.</p>
+    <h3>13.2 Termination by Lopay</h3>
+    <p>We reserve the right to suspend or terminate your account at any time, with or without notice, for reasons including but not limited to:</p>
+    <ul>
+      <li>Violation of these Terms.</li>
+      <li>Fraudulent or illegal activity.</li>
+      <li>Failure to provide accurate verification information.</li>
+      <li>Extended account inactivity.</li>
+    </ul>
+    <h3>13.3 Effect of Termination</h3>
+    <p>Upon termination, your right to access and use the Service ceases immediately. Sections of these Terms that by their nature should survive termination shall do so, including Sections 9, 11, 12, and 14.</p>
+  </div>
+
+  <div class="legal-section" id="t14">
+    <h2>14. Governing Law & Disputes</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the <strong>Federal Republic of Nigeria</strong>, without regard to its conflict of law provisions.</p>
+    <p>Any dispute arising out of or relating to these Terms or your use of the Service shall first be submitted to good-faith mediation. If mediation fails, disputes shall be resolved by binding arbitration in Lagos, Nigeria, in accordance with the Arbitration and Conciliation Act (Cap A18, Laws of the Federation of Nigeria, 2004).</p>
+    <p>Nothing in this clause shall prevent either party from seeking urgent injunctive or other equitable relief from a court of competent jurisdiction.</p>
+  </div>
+
+  <div class="legal-section" id="t15">
+    <h2>15. Changes to Terms</h2>
+    <p>We may update these Terms from time to time. When we make material changes, we will notify you by email or through a prominent notice on the platform. The updated Terms will indicate the new effective date.</p>
+    <p>Your continued use of the Service after the effective date of any changes constitutes your acceptance of the revised Terms. If you do not agree to the new Terms, you must stop using the Service and close your account.</p>
+  </div>
+
+  <div class="legal-section" id="t16">
+    <h2>16. Contact Us</h2>
+    <p>If you have any questions about these Terms of Service, please contact us:</p>
+    <ul>
+      <li><strong>Email:</strong> legal@lopay.ng</li>
+      <li><strong>Support:</strong> support@lopay.ng</li>
+      <li><strong>Address:</strong> Lopay Financial Technologies Ltd., Lagos, Nigeria</li>
+    </ul>
+  </div>
+
+  <div class="contact-box">
+    <h3>Have a question about our Terms?</h3>
+    <p>Our legal and support teams are happy to help clarify anything in this document.</p>
+    <a href="mailto:legal@lopay.ng">Contact Legal Team</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Lopay Financial Technologies Ltd. &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a></p>
+</footer>
+
+</body>
+</html>
